@@ -6,7 +6,7 @@ use ieee.std_logic_unsigned.all;
 entity output_ports is
 	port( address_i : in std_logic_vector (7 downto 0);
 		  data_in	: in std_logic_vector (7 downto 0);
-		  write_i	: in std_logic_vector (7 downto 0);
+		  write_i	: in std_logic;
 		  clk_i		: in std_logic;
 		  rst_i		: in std_logic;
 		  ---outputs---
@@ -25,7 +25,7 @@ entity output_ports is
 		  port_out_12	: out std_logic_vector (7 downto 0);
 		  port_out_13	: out std_logic_vector (7 downto 0);
 		  port_out_14	: out std_logic_vector (7 downto 0);
-		  port_out_15	: out std_logic_vector (7 downto 0);
+		  port_out_15	: out std_logic_vector (7 downto 0)
 
 		);
 
@@ -36,9 +36,9 @@ architecture arch of output_ports is
 
 begin
 
-	process(clk,rst)
+	process(clk_i,rst_i)
 	begin
-		if(rst = '1') then
+		if(rst_i = '1') then
 			port_out_00	<= (others => '0');
 			port_out_01 <= (others => '0');
 			port_out_02 <= (others => '0');
@@ -56,9 +56,9 @@ begin
 			port_out_14 <= (others => '0');
 			port_out_15 <= (others => '0');
 		
-		elsif(rising_edge(clk)) then
+		elsif(rising_edge(clk_i)) then
 			if(write_i = '1') then
-				case address is
+				case address_i is
 					when x"E0" =>
 						port_out_00 <= data_in;
 					when x"E1" =>
