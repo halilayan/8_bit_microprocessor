@@ -8,52 +8,52 @@ entity program_memory is
 			clk_i		: in std_logic;
 			address_i	: in std_logic_vector (7 downto 0);
 			---outputs:
-			data_out: out std_logic_vector(7 downto 0);	
+			data_out: out std_logic_vector(7 downto 0)	
 	);
 end entity;
 
 architecture arch of program_memory is
 
---BÜTÜN KOMUTLAR
+--BÃœTÃœN KOMUTLAR
 
---Kaydet/Yükle komutlarý
-constant YUKLE_A_SBT 	: std_logic_vector (7 downto 0) := "86";
-constant YUKLE_A		: std_logic_vector (7 downto 0) := "87";
-constant YUKLE_B_SBT	: std_logic_vector (7 downto 0) := "88";
-constant YUKLE_B		: std_logic_vector (7 downto 0) := "89";
-constant KAYDET_A		: std_logic_vector (7 downto 0) := "96";
-constant KAYDET_B		: std_logic_vector (7 downto 0) := "97";
+--Kaydet/YÃ¼kle komutlarÄ±
+constant YUKLE_A_SBT 	: std_logic_vector (7 downto 0) := x"86";
+constant YUKLE_A		: std_logic_vector (7 downto 0) := x"87";
+constant YUKLE_B_SBT	: std_logic_vector (7 downto 0) := x"88";
+constant YUKLE_B		: std_logic_vector (7 downto 0) := x"89";
+constant KAYDET_A		: std_logic_vector (7 downto 0) := x"96";
+constant KAYDET_B		: std_logic_vector (7 downto 0) := x"97";
 
---ALU komutlarý
-constant TOPLA_AB		: std_logic_vector (7 downto 0) := "42";
-constant CIKART_AB		: std_logic_vector (7 downto 0) := "43";
-constant AND_AB			: std_logic_vector (7 downto 0) := "44";
-constant OR_AB			: std_logic_vector (7 downto 0) := "45";
-constant ARTTIR_A		: std_logic_vector (7 downto 0) := "46";
-constant ARTTIR_B		: std_logic_vector (7 downto 0) := "47";
-constant AZALT_A		: std_logic_vector (7 downto 0) := "48";
-constant AZALT_B		: std_logic_vector (7 downto 0) := "49";
+--ALU komutlarÄ±
+constant TOPLA_AB		: std_logic_vector (7 downto 0) := x"42";
+constant CIKART_AB		: std_logic_vector (7 downto 0) := x"43";
+constant AND_AB			: std_logic_vector (7 downto 0) := x"44";
+constant OR_AB			: std_logic_vector (7 downto 0) := x"45";
+constant ARTTIR_A		: std_logic_vector (7 downto 0) := x"46";
+constant ARTTIR_B		: std_logic_vector (7 downto 0) := x"47";
+constant AZALT_A		: std_logic_vector (7 downto 0) := x"48";
+constant AZALT_B		: std_logic_vector (7 downto 0) := x"49";
 
---Atlama komutlarý
-constant ATLA					: std_logic_vector (7 downto 0) := "20";
-constant ATLA_NEGATIFSE			: std_logic_vector (7 downto 0) := "21";
-constant ATLA_POZITIFSE			: std_logic_vector (7 downto 0) := "22";
-constant ATLA_ESISTE_SIFIRA		: std_logic_vector (7 downto 0) := "23";
-constant ATLA_DEGILSE_SIFIR		: std_logic_vector (7 downto 0) := "24";
-constant ATLA_OVERFLOW_VARSA	: std_logic_vector (7 downto 0) := "25";
-constant ATLA_OVERFLOW_YOKSA	: std_logic_vector (7 downto 0) := "26";
-constant ATLA_ELDE_VARSA		: std_logic_vector (7 downto 0) := "27";
-constant ATLA_ELDE_YOKSA		: std_logic_vector (7 downto 0) := "28";
+--Atlama komutlarÄ±
+constant ATLA					: std_logic_vector (7 downto 0) := x"20";
+constant ATLA_NEGATIFSE			: std_logic_vector (7 downto 0) := x"21";
+constant ATLA_POZITIFSE			: std_logic_vector (7 downto 0) := x"22";
+constant ATLA_ESISTE_SIFIRA		: std_logic_vector (7 downto 0) := x"23";
+constant ATLA_DEGILSE_SIFIR		: std_logic_vector (7 downto 0) := x"24";
+constant ATLA_OVERFLOW_VARSA	: std_logic_vector (7 downto 0) := x"25";
+constant ATLA_OVERFLOW_YOKSA	: std_logic_vector (7 downto 0) := x"26";
+constant ATLA_ELDE_VARSA		: std_logic_vector (7 downto 0) := x"27";
+constant ATLA_ELDE_YOKSA		: std_logic_vector (7 downto 0) := x"28";
 
 type rom_type is array (0 to 127) of std_logic_vector(7 downto 0);
 	constant ROM : rom_type := (
 								0 		=> YUKLE_A_SBT,
-								1 		=> x "AA",
+								1 		=> x"0F",
 								2 		=> KAYDET_A,
-								3 		=> x "EO",	
+								3 		=> x"80",	
 								4 		=> ATLA,	
-								5 		=> x "00",
-								others  => x "00"
+								5 		=> x"00",
+								others  => x"00"
 								);
 
 signal enable : std_logic;
