@@ -7,12 +7,12 @@ entity data_path is
 	port(
 			clk_i		: in std_logic;
 			rst_i		: in std_logic;
-			IR_Load_i	: in std_logic;	-- Komut register'i yükle kontrol
+			IR_Load_i	: in std_logic;	-- Komut register'i yÃ¼kle kontrol
 			MAR_Load_i 	: in std_logic;
 			PC_Load_i 	: in std_logic;
 			PC_Inc_i    : in std_logic;
-			A_Load_i 		: in std_logic;
-			B_Load_i 		: in std_logic;
+			A_Load_i 	: in std_logic;
+			B_Load_i 	: in std_logic;
 			ALU_Sel_i 	: in std_logic_vector(2 downto 0);
 			CCR_Load_i 	: in std_logic;
 			BUS1_Sel_i	: in std_logic_vector(1 downto 0);
@@ -20,9 +20,9 @@ entity data_path is
 			from_memory_i: in std_logic_vector(7 downto 0);
 			-- Outputs:
 			IR_o			: out std_logic_vector(7 downto 0);
-			address_o		: out std_logic_vector(7 downto 0);	-- belleðe giden adres bilgisi
+			address_o		: out std_logic_vector(7 downto 0);	-- belleÄŸe giden adres bilgisi
 			CCR_Result_o	: out std_logic_vector(3 downto 0);	-- NZVC
-			to_memory_o	: out std_logic_vector(7 downto 0)	-- belleðe giden veri
+			to_memory_o	: out std_logic_vector(7 downto 0)	-- belleÄŸe giden veri
 		
 	);
 end data_path;
@@ -33,16 +33,16 @@ architecture arch of data_path is
 -- ALU:
 component ALU is
 	port(
-			A			: in std_logic_vector(7 downto 0);	-- Signed
-			B			: in std_logic_vector(7 downto 0);	-- Signed
-			ALU_Sel_i		: in std_logic_vector(2 downto 0);	-- iþlem türü
+			A_i			: in std_logic_vector(7 downto 0);	-- Signed
+			B_i			: in std_logic_vector(7 downto 0);	-- Signed
+			ALU_Sel_i		: in std_logic_vector(2 downto 0);	-- iÅŸlem tÃ¼rÃ¼
 			-- Output:
-			NZVC		: out std_logic_vector(3 downto 0);
-			ALU_result	: out std_logic_vector(7 downto 0)
+			NZVC_o		: out std_logic_vector(3 downto 0);
+			ALU_result_o	: out std_logic_vector(7 downto 0)
 	);
 end component;
 
--- Veri yolu iç sinyalleri:
+-- Veri yolu iÃ§ sinyalleri:
 signal BUS1	 		 : std_logic_vector(7 downto 0);
 signal BUS2			 : std_logic_vector(7 downto 0);
 signal ALU_result	 : std_logic_vector(7 downto 0);
@@ -132,12 +132,12 @@ begin
 -- ALU
 ALU_U: ALU port map
 			(	
-				A			=> B_reg,		
-				B			=> BUS1,	
-				ALU_Sel		=> ALU_Sel,
+				A_i			    => B_reg,		
+				B_i			    => BUS1,	
+				ALU_Sel_i		=> ALU_Sel_i,
 				-- Output:
-				NZVC		=> CCR_in,
-				ALU_result	=> ALU_result
+				NZVC_o		=> CCR_in,
+				ALU_result_o	=> ALU_result
 			);
 		
 -- CCR Register
@@ -153,7 +153,7 @@ ALU_U: ALU port map
 	end process;
 	CCR_Result_o <= CCR;
 	
--- Veri yolundan belleðe gidecek sinyal atamasý:
+-- Veri yolundan belleÄŸe gidecek sinyal atamasÄ±:
 	to_memory_o <= BUS1;
 
 
