@@ -6,7 +6,7 @@ use ieee.std_logic_unsigned.all;
 entity computer is
 	port(	
 			clk_i		: in std_logic;
-			rst	_i		: in std_logic;
+			rst_i		: in std_logic;
 			port_in_00	: in std_logic_vector(7 downto 0);
 			port_in_01	: in std_logic_vector(7 downto 0);
 			port_in_02	: in std_logic_vector(7 downto 0);
@@ -64,9 +64,9 @@ component memory is
 	port(
 			clk_i			: in std_logic;
 			rst_i			: in std_logic;
-			address_o		: in std_logic_vector(7 downto 0);
+			address_i		: in std_logic_vector(7 downto 0);
 			data_in		: in std_logic_vector(7 downto 0);
-			write_i 	: in std_logic;	-- CPU tarafýndan goöderilen kontrol sinyali / yaz emri
+			write_i 	: in std_logic;	-- CPU tarafÄ±ndan goÃ¶derilen kontrol sinyali / yaz emri
 			port_in_00	: in std_logic_vector(7 downto 0);
 			port_in_01	: in std_logic_vector(7 downto 0);
 			port_in_02	: in std_logic_vector(7 downto 0);
@@ -121,8 +121,8 @@ cpu_module: CPU port map
 					from_memory_i	    =>	data_out,
 					-- Outputs:   	    =>
 					to_memory_o	  	    =>	data_in,
-					write_o	  	  	    =>	write_o,
-					address_o	  	    =>	address_o
+					write_o	  	  	    =>	write_i,
+					address_o	  	    =>	address_i
 				);
 
 -- Memory port map:
@@ -132,7 +132,7 @@ memory_module: memory port map
 				rst_i		    =>  rst_i,
 				address_i	    =>  address_i,
 				data_in		    =>  data_in	,
-				write__i 	    =>  write_i ,
+				write_i 	    =>  write_i ,
 				port_in_00	    =>  port_in_00,
 				port_in_01	    =>  port_in_01,
 				port_in_02	    =>  port_in_02,
