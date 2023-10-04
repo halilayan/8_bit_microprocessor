@@ -7,7 +7,7 @@ entity ALU is
 	port(
 			A_i			: in std_logic_vector(7 downto 0);	-- Signed
 			B_i			: in std_logic_vector(7 downto 0);	-- Signed
-			ALU_Sel_i		: in std_logic_vector(2 downto 0);	-- Ýþlem turu
+			ALU_Sel_i		: in std_logic_vector(2 downto 0);	-- Ä°ÅŸlem turu
 			-- Output:
 			NZVC_o		: out std_logic_vector(3 downto 0);
 			ALU_result_o	: out std_logic_vector(7 downto 0)
@@ -16,10 +16,10 @@ end ALU;
 
 architecture arch of ALU is
 
-signal sum_unsigned	: std_logic_vector(8 downto 0); -- Carry var mý görmek için
+signal sum_unsigned	: std_logic_vector(8 downto 0); -- Carry var mÄ± gÃ¶rmek iÃ§in
 signal alu_signal	: std_logic_vector(7 downto 0);
-signal toplama_overflow	: std_logic;	 -- Overflow var mi görmek için (Toplamada)
-signal cikartma_overflow	: std_logic;	 -- Carry var mi görmek için (Çýkartmada)
+signal toplama_overflow	: std_logic;	 -- Overflow var mi gÃ¶rmek iÃ§in (Toplamada)
+signal cikartma_overflow	: std_logic;	 -- Carry var mi gÃ¶rmek iÃ§in (Ã‡Ä±kartmada)
 
 begin
 
