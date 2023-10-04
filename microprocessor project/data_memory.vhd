@@ -7,10 +7,10 @@ entity data_memory is
 	port	(
 			address_i	: in std_logic_vector (7 downto 0);
 			data_in		: in std_logic_vector (7 downto 0);
-			write_i		: in std_logic (7 downto 0);
-			clk_i		: in std_logic (7 downto 0);
+			write_i		: in std_logic ;
+			clk_i		: in std_logic ;
 			----outs:
-			data_out	: out std_logic_vector (7 downto 0);	
+			data_out	: out std_logic_vector (7 downto 0)	
 			);
 
 end entity;
