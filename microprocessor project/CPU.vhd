@@ -35,7 +35,7 @@ component control_unit is
 			CCR_Load_o 		: out std_logic;
 			BUS1_Sel_o		: out std_logic_vector(1 downto 0);
 			BUS2_Sel_o		: out std_logic_vector(1 downto 0);
-			write_en_o		: out std_logic
+			write_o 		: out std_logic
 
 	);
 end component;
@@ -87,19 +87,19 @@ control_unit_module: control_unit port map
 									(	
 										clk_i				=> 	clk_i,
 										rst_i			    =>  rst_i,
-										CCR_Result_i	    =>  CCR_Result_i,
-										IR_i			    =>  IR_i,
+										CCR_Result_i	    =>  CCR_Result,
+										IR_i			    =>  IR,
 										-- Outputlar   
-										IR_Load_o		    => IR_Load_o,
-										MAR_Load_o 	   	    => MAR_Load_o,
-										PC_Load_o 	   	    => PC_Load_o,
-										PC_Inc_o 		    => PC_Inc_o,
-										A_Load_o 		    => A_Load_o, 	
-										B_Load_o 		    => B_Load_o, 	
-										ALU_Sel_o 	   	    => ALU_Sel_o, 
-										CCR_Load_o 	    	=> CCR_Load_o,
-										BUS1_Sel_o	    	=> BUS1_Sel_o,
-										BUS2_Sel_o	    	=> BUS2_Sel_o,
+										IR_Load_o		    => IR_Load,
+										MAR_Load_o 	   	    => MAR_Load,
+										PC_Load_o 	   	    => PC_Load,
+										PC_Inc_o 		    => PC_Inc,
+										A_Load_o 		    => A_Load, 	
+										B_Load_o 		    => B_Load, 	
+										ALU_Sel_o 	   	    => ALU_Sel, 
+										CCR_Load_o 	    	=> CCR_Load,
+										BUS1_Sel_o	    	=> BUS1_Sel,
+										BUS2_Sel_o	    	=> BUS2_Sel,
 										write_o	    		=> write_o
 									);
 
@@ -109,21 +109,21 @@ data_path_module: data_path port map
 							(
 								clk_i			=> clk_i,			
 								rst_i		    => rst_i,			
-								IR_Load_i	    => IR_Load_i,	
-								MAR_Load_i 	    => MAR_Load_i,	
-								PC_Load_i 	    => PC_Load_i, 	
-								PC_Inc_i 	    => PC_Inc_i, 		
-								A_Load_i 	    => A_Load_i, 		
-								B_Load _i	    => B_Load_i, 		
-								ALU_Sel _i	    => ALU_Sel_i, 	
-								CCR_Load_i 	    => CCR_Load_i, 	
-								BUS1_Sel_i	    => BUS1_Sel_i,	
-								BUS2_Sel_i	    => BUS2_Sel_i,	
+								IR_Load_i	    => IR_Load,	
+								MAR_Load_i 	    => MAR_Load,	
+								PC_Load_i 	    => PC_Load, 	
+								PC_Inc_i 	    => PC_Inc, 		
+								A_Load_i 	    => A_Load, 		
+								B_Load_i	    => B_Load, 		
+								ALU_Sel_i	    => ALU_Sel, 	
+								CCR_Load_i 	    => CCR_Load, 	
+								BUS1_Sel_i	    => BUS1_Sel,	
+								BUS2_Sel_i	    => BUS2_Sel,	
 								from_memory_i   => from_memory_i,	
 								-- Outputs:     => -- Outputs:
-								IR_o			    => IR_o,			
+								IR_o			    => IR,			
 								address_o		    => address_o,		
-								CCR_Result_o	    => CCR_Result_o,	
+								CCR_Result_o	    => CCR_Result,	
 								to_memory_o	    => to_memory_o	
 							);
 
