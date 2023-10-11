@@ -10,7 +10,7 @@ entity control_unit is
 			CCR_Result_i	: in std_logic_vector(3 downto 0);
 			IR_i			: in std_logic_vector(7 downto 0);
 			-- Outputlar:
-			IR_Load_o		: out std_logic;	-- Komut register'i yÃ¼kle kontrol
+			IR_Load_o		: out std_logic;	-- Komut register'i yükle kontrol
 			MAR_Load_o 		: out std_logic;
 			PC_Load_o 		: out std_logic;
 			PC_Inc_o 		: out std_logic;
@@ -41,16 +41,16 @@ type state_type is  (
 					
 signal current_state, next_state : state_type;
 
--- TÃ¼m komutlar:
+-- Tüm komutlar:
 
--- Kaydet/YÃ¼kle komutlarÄ±
+-- Kaydet/Yükle komutlarý
 constant YUKLE_A_SBT	:std_logic_vector(7 downto 0) := x"86";
 constant YUKLE_A		:std_logic_vector(7 downto 0) := x"87";
 constant YUKLE_B_SBT	:std_logic_vector(7 downto 0) := x"88";
 constant YUKLE_B		:std_logic_vector(7 downto 0) := x"89";
 constant KAYDET_A		:std_logic_vector(7 downto 0) := x"96";	
 constant KAYDET_B		:std_logic_vector(7 downto 0) := x"97";
--- ALU KomutlarÄ±
+-- ALU Komutlarý
 constant TOPLA_AB		:std_logic_vector(7 downto 0) := x"42";
 constant CIKAR_AB		:std_logic_vector(7 downto 0) := x"43";
 constant AND_AB			:std_logic_vector(7 downto 0) := x"44";
@@ -59,7 +59,7 @@ constant ARTTIR_A		:std_logic_vector(7 downto 0) := x"46";
 constant ARTTIR_B		:std_logic_vector(7 downto 0) := x"47";
 constant DUSUR_A		:std_logic_vector(7 downto 0) := x"48";
 constant DUSUR_B		:std_logic_vector(7 downto 0) := x"49";
--- Atlama komutlarÄ± (KoÅŸullu/KoÅŸulsuz)
+-- Atlama komutlarý (Koþullu/Koþulsuz)
 constant ATLA					:std_logic_vector(7 downto 0) := x"20";
 constant ATLA_NEGATIFSE			:std_logic_vector(7 downto 0) := x"21";
 constant ATLA_POZITIFSE			:std_logic_vector(7 downto 0) := x"22";
@@ -215,19 +215,19 @@ begin
 			when S_FETCH_0  =>
 				BUS1_Sel_o <= "00"; -- PC
 				BUS2_Sel_o <= "01"; -- BUS1
-				MAR_Load_o <= '1';  -- BUS2 daki program sayacÄ± deÄŸeri MAR'a alÄ±ndÄ±
+				MAR_Load_o <= '1';  -- BUS2 daki program sayacý deðeri MAR'a alýndý
 			when S_FETCH_1  =>
 				PC_Inc_o <= '1';	
 			when S_FETCH_2  =>
 				BUS2_Sel_o <= "10";		-- from memory
 				IR_Load_o <= '1';
 			when S_DECODE_3  =>
-				-- next state zaten gÃ¼ncellendi, ve ilgili dallanma saÄŸlandÄ±
+				-- next state zaten güncellendi, ve ilgili dallanma saðlandý
 ---------------------------------------------------------------
 			when S_LDA_IMM_4 =>
 				BUS1_Sel_o <= "00";	-- PC
 				BUS2_Sel_o <= "01"; -- BUS1
-				MAR_Load_o <= '1';  -- BUS2 daki program sayacÄ± deÄŸeri MAR'a alÄ±ndÄ±
+				MAR_Load_o <= '1';  -- BUS2 daki program sayacý deðeri MAR'a alýndý
 			when S_LDA_IMM_5 =>
 				PC_Inc_o <= '1';	
 			when S_LDA_IMM_6 =>
@@ -238,14 +238,14 @@ begin
 			when S_LDA_DIR_4 =>
 				BUS1_Sel_o <= "00";	-- PC
 				BUS2_Sel_o <= "01"; -- BUS1
-				MAR_Load_o <= '1';  -- BUS2 daki program sayacÄ± deÄŸeri MAR'a alÄ±ndÄ±
+				MAR_Load_o <= '1';  -- BUS2 daki program sayacý deðeri MAR'a alýndý
 			when S_LDA_DIR_5 =>
 				PC_Inc_o <= '1';	
 			when S_LDA_DIR_6 =>
 				BUS2_Sel_o <= "10";		-- from memory
-				MAR_Load_o <= '1';  -- BUS2 daki program sayacÄ± deÄŸeri MAR'a alÄ±ndÄ±
+				MAR_Load_o <= '1';  -- BUS2 daki program sayacý deðeri MAR'a alýndý
 			when S_LDA_DIR_7 =>	
-				-- BOS : Bellekten okuma yapÄ±lmasÄ± bekleniyor.
+				-- BOS : Bellekten okuma yapýlmasý bekleniyor.
 			when S_LDA_DIR_8 =>
 				BUS2_Sel_o <= "10";		-- from memory
 				A_Load_o <= '1';
@@ -253,7 +253,7 @@ begin
 			when S_LDB_IMM_4 =>
 				BUS1_Sel_o <= "00";	-- PC
 				BUS2_Sel_o <= "01"; -- BUS1
-				MAR_Load_o <= '1';  -- BUS2 daki program sayacÄ± deÄŸeri MAR'a alÄ±ndÄ±
+				MAR_Load_o <= '1';  -- BUS2 daki program sayacý deðeri MAR'a alýndý
 			when S_LDB_IMM_5 =>
 				PC_Inc_o <= '1';	
 			when S_LDB_IMM_6 =>
@@ -264,14 +264,14 @@ begin
 			when S_LDB_DIR_4 =>
 				BUS1_Sel_o <= "00";	-- PC
 				BUS2_Sel_o <= "01"; -- BUS1
-				MAR_Load_o <= '1';  -- BUS2 daki program sayacÄ± deÄŸeri MAR'a alÄ±ndÄ±
+				MAR_Load_o <= '1';  -- BUS2 daki program sayacý deðeri MAR'a alýndý
 			when S_LDB_DIR_5 =>
 				PC_Inc_o <= '1';	
 			when S_LDB_DIR_6 =>
 				BUS2_Sel_o <= "10";		-- from memory
-				MAR_Load_o <= '1';  -- BUS2 daki program sayacÄ± deÄŸeri MAR'a alÄ±ndÄ±
+				MAR_Load_o <= '1';  -- BUS2 daki program sayacý deðeri MAR'a alýndý
 			when S_LDB_DIR_7 =>	
-				-- BOS : Bellekten okuma yapÄ±lmasÄ± bekleniyor.
+				-- BOS : Bellekten okuma yapýlmasý bekleniyor.
 			when S_LDB_DIR_8 =>
 				BUS2_Sel_o <= "10";		-- from memory
 				A_Load_o <= '1';
@@ -280,12 +280,12 @@ begin
 			when S_STA_DIR_4 =>
 				BUS1_Sel_o <= "00";	-- PC
 				BUS2_Sel_o <= "01"; -- BUS1
-				MAR_Load_o <= '1';  -- BUS2 daki program sayacÄ± deÄŸeri MAR'a alÄ±ndÄ±
+				MAR_Load_o <= '1';  -- BUS2 daki program sayacý deðeri MAR'a alýndý
 			when S_STA_DIR_5 =>
 				PC_Inc_o <= '1';	
 			when S_STA_DIR_6 =>
 				BUS2_Sel_o <= "10";		-- from memory
-				MAR_Load_o <= '1';  -- BUS2 daki program sayacÄ± deÄŸeri MAR'a alÄ±ndÄ±
+				MAR_Load_o <= '1';  -- BUS2 daki program sayacý deðeri MAR'a alýndý
 			when S_STA_DIR_7 =>
 				BUS1_Sel_o <= "01";	-- A_reg
 				write_o <= '1';
@@ -302,7 +302,7 @@ begin
 			when S_BRA_4 =>
 				BUS1_Sel_o <= "00";	-- PC
 				BUS2_Sel_o <= "01"; -- BUS1
-				MAR_Load_o <= '1';  -- BUS2 daki program sayacÄ± deÄŸeri MAR'a alÄ±ndÄ±
+				MAR_Load_o <= '1';  -- BUS2 daki program sayacý deðeri MAR'a alýndý
 			when S_BRA_5 =>
 				-- BOS
 			when S_BRA_6 =>
@@ -313,11 +313,12 @@ begin
 			when S_BEQ_4 =>
 				BUS1_Sel_o <= "00";	-- PC
 				BUS2_Sel_o <= "01"; -- BUS1
-				MAR_Load_o <= '1';  -- BUS2 daki program sayacÄ± deÄŸeri MAR'a alÄ±ndÄ±
+				MAR_Load_o <= '1';  -- BUS2 daki program sayacý deðeri MAR'a alýndý
+			when S_BEQ_5 =>
 				
 			when S_BEQ_6 =>
 				BUS2_Sel_o <= "10";		-- from memory
-				PC_Load_o <= '1';			-- Program sayacÄ± registerÄ±na BUS2 verisini al
+				PC_Load_o <= '1';			-- Program sayacý registerýna BUS2 verisini al
 			when S_BEQ_7 =>	-- Z = '0' durumu, komut bypass
 				PC_Inc_o <= '1';
 ---------------------------------------------------------------

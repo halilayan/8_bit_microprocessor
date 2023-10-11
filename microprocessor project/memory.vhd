@@ -9,7 +9,7 @@ entity memory is
 			rst_i			: in std_logic;
 			address_i		: in std_logic_vector(7 downto 0);
 			data_in			: in std_logic_vector(7 downto 0);
-			write_i 		: in std_logic;	-- CPU tarafÄ±ndan gÃ¶nderilen kontrol sinyali / yaz emri
+			write_i 		: in std_logic;	-- CPU tarafýndan gönderilen kontrol sinyali / yaz emri
 			port_in_00		: in std_logic_vector(7 downto 0);
 			port_in_01		: in std_logic_vector(7 downto 0);
 			port_in_02		: in std_logic_vector(7 downto 0);
@@ -51,7 +51,7 @@ end entity;
 
 architecture arch of memory is
 
--- Program BelleÄŸi(ROM):
+-- Program Belleði(ROM):
 component program_memory is
 	port(
 			clk_i			: in std_logic;
@@ -61,26 +61,26 @@ component program_memory is
 	);
 end component;
 
--- Veri BelleÄŸi (RAM):
+-- Veri Belleði (RAM):
 component data_memory is
 	port(
 			clk_i			: in std_logic;
 			address_i		: in std_logic_vector(7 downto 0);
 			data_in			: in std_logic_vector(7 downto 0);
-			write_i 		: in std_logic;	-- CPU tarafÄ±ndan gÃ¶nderilen kontrol sinyali / yaz emri
+			write_i 		: in std_logic;	-- CPU tarafýndan gönderilen kontrol sinyali / yaz emri
 			-- Output:
 			data_out		: out std_logic_vector(7 downto 0)
 	);
 end component;
 
--- Output PortlarÄ±:
+-- Output Portlarý:
 component output_ports is
 	port(
 			clk_i			: in std_logic;
 			rst_i			: in std_logic;
 			address_i		: in std_logic_vector(7 downto 0);
 			data_in			: in std_logic_vector(7 downto 0);
-			write_i 		: in std_logic;	-- CPU tarafÄ±ndan gÃ¶nderilen kontrol sinyali / yaz emri
+			write_i 		: in std_logic;	-- CPU tarafýndan gönderilen kontrol sinyali / yaz emri
 			-- Output:
 			port_out_00		: out std_logic_vector(7 downto 0);
 			port_out_01		: out std_logic_vector(7 downto 0);

@@ -66,7 +66,7 @@ component memory is
 			rst_i			: in std_logic;
 			address_i		: in std_logic_vector(7 downto 0);
 			data_in		: in std_logic_vector(7 downto 0);
-			write_i 	: in std_logic;	-- CPU tarafÄ±ndan goÃ¶derilen kontrol sinyali / yaz emri
+			write_i 	: in std_logic;	-- CPU tarafýndan goöderilen kontrol sinyali / yaz emri
 			port_in_00	: in std_logic_vector(7 downto 0);
 			port_in_01	: in std_logic_vector(7 downto 0);
 			port_in_02	: in std_logic_vector(7 downto 0);

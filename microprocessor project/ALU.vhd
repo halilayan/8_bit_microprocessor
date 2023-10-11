@@ -5,21 +5,21 @@ use ieee.std_logic_unsigned.all;
 
 entity ALU is
 	port(
-			A_i			: in std_logic_vector(7 downto 0);	-- Signed
-			B_i			: in std_logic_vector(7 downto 0);	-- Signed
-			ALU_Sel_i		: in std_logic_vector(2 downto 0);	-- Ä°ÅŸlem turu
+			A_i				: in std_logic_vector(7 downto 0);	-- Signed
+			B_i				: in std_logic_vector(7 downto 0);	-- Signed
+			ALU_Sel_i		: in std_logic_vector(2 downto 0);	-- Ýþlem turu
 			-- Output:
-			NZVC_o		: out std_logic_vector(3 downto 0);
+			NZVC_o			: out std_logic_vector(3 downto 0);
 			ALU_result_o	: out std_logic_vector(7 downto 0)
 	);
 end ALU;
 
 architecture arch of ALU is
 
-signal sum_unsigned	: std_logic_vector(8 downto 0); -- Carry var mÄ± gÃ¶rmek iÃ§in
+signal sum_unsigned	: std_logic_vector(8 downto 0); -- Carry var mý görmek için
 signal alu_signal	: std_logic_vector(7 downto 0);
-signal toplama_overflow	: std_logic;	 -- Overflow var mi gÃ¶rmek iÃ§in (Toplamada)
-signal cikartma_overflow	: std_logic;	 -- Carry var mi gÃ¶rmek iÃ§in (Ã‡Ä±kartmada)
+signal toplama_overflow	: std_logic;	 -- Overflow var mi görmek için (Toplamada)
+signal cikartma_overflow	: std_logic;	 -- Carry var mi görmek için (Çýkartmada)
 
 begin
 
@@ -32,7 +32,7 @@ begin
 			alu_signal <= A_i + B_i;
 			sum_unsigned <= ('0' & A_i) + ('0' + B_i);
 			
-		when "001" =>	-- Cikarma
+		when "001" =>	-- Çýkartma
 			alu_signal <= A_i - B_i;
 			sum_unsigned <= ('0' & A_i) - ('0' + B_i);
 			
@@ -57,7 +57,7 @@ end process;
 
 ALU_result_o <= alu_signal;
 
---- NZVC_o	(Negatif, Sifir, Overflow, Carry)
+--- NZVC_o	(Negatif, Sýfýr, Overflow, Carry)
 
 --N:
 NZVC_o(3) <= alu_signal(7);
@@ -74,6 +74,6 @@ NZVC_o(1) <= toplama_overflow when (ALU_Sel_i = "000") else
 		   
 --C:
 NZVC_o(0) <= sum_unsigned(8) when (ALU_Sel_i = "000") else
-		   sum_unsigned(8) when (ALU_Sel_i = "001") else '0';
+			 sum_unsigned(8) when (ALU_Sel_i = "001") else '0';
 	
 end architecture;

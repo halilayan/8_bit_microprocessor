@@ -14,9 +14,9 @@ end entity;
 
 architecture arch of program_memory is
 
---BÃœTÃœN KOMUTLAR
+--BÜTÜN KOMUTLAR
 
---Kaydet/YÃ¼kle komutlarÄ±
+--Kaydet/Yükle komutlarý
 constant YUKLE_A_SBT 	: std_logic_vector (7 downto 0) := x"86";
 constant YUKLE_A		: std_logic_vector (7 downto 0) := x"87";
 constant YUKLE_B_SBT	: std_logic_vector (7 downto 0) := x"88";
@@ -24,7 +24,7 @@ constant YUKLE_B		: std_logic_vector (7 downto 0) := x"89";
 constant KAYDET_A		: std_logic_vector (7 downto 0) := x"96";
 constant KAYDET_B		: std_logic_vector (7 downto 0) := x"97";
 
---ALU komutlarÄ±
+--ALU komutlarý
 constant TOPLA_AB		: std_logic_vector (7 downto 0) := x"42";
 constant CIKART_AB		: std_logic_vector (7 downto 0) := x"43";
 constant AND_AB			: std_logic_vector (7 downto 0) := x"44";
@@ -34,7 +34,7 @@ constant ARTTIR_B		: std_logic_vector (7 downto 0) := x"47";
 constant AZALT_A		: std_logic_vector (7 downto 0) := x"48";
 constant AZALT_B		: std_logic_vector (7 downto 0) := x"49";
 
---Atlama komutlarÄ±
+--Atlama komutlarý
 constant ATLA					: std_logic_vector (7 downto 0) := x"20";
 constant ATLA_NEGATIFSE			: std_logic_vector (7 downto 0) := x"21";
 constant ATLA_POZITIFSE			: std_logic_vector (7 downto 0) := x"22";
@@ -46,14 +46,17 @@ constant ATLA_ELDE_VARSA		: std_logic_vector (7 downto 0) := x"27";
 constant ATLA_ELDE_YOKSA		: std_logic_vector (7 downto 0) := x"28";
 
 type rom_type is array (0 to 127) of std_logic_vector(7 downto 0);
-	constant ROM : rom_type := (
-								0 		=> YUKLE_A_SBT,
-								1 		=> x"0F",
-								2 		=> KAYDET_A,
-								3 		=> x"80",	
-								4 		=> ATLA,	
-								5 		=> x"00",
-								others  => x"00"
+	constant ROM : rom_type := (	
+                                	0	=> YUKLE_A_SBT,
+									1	=> x"0F",
+									2	=> YUKLE_B_SBT,
+									3	=> x"41",
+									4	=> TOPLA_AB,
+									5	=> KAYDET_A,
+									6   => x"80",
+									7   => ATLA,
+									8   => x"00",									
+									others 	=> x"00"
 								);
 
 signal enable : std_logic;

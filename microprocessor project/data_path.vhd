@@ -7,7 +7,7 @@ entity data_path is
 	port(
 			clk_i		: in std_logic;
 			rst_i		: in std_logic;
-			IR_Load_i	: in std_logic;	-- Komut register'i yÃ¼kle kontrol
+			IR_Load_i	: in std_logic;	-- Komut register'i yükle kontrol
 			MAR_Load_i 	: in std_logic;
 			PC_Load_i 	: in std_logic;
 			PC_Inc_i    : in std_logic;
@@ -20,9 +20,9 @@ entity data_path is
 			from_memory_i: in std_logic_vector(7 downto 0);
 			-- Outputs:
 			IR_o			: out std_logic_vector(7 downto 0);
-			address_o		: out std_logic_vector(7 downto 0);	-- belleÄŸe giden adres bilgisi
+			address_o		: out std_logic_vector(7 downto 0);	-- belleðe giden adres bilgisi
 			CCR_Result_o	: out std_logic_vector(3 downto 0);	-- NZVC
-			to_memory_o	: out std_logic_vector(7 downto 0)	-- belleÄŸe giden veri
+			to_memory_o	: out std_logic_vector(7 downto 0)	-- belleðe giden veri
 		
 	);
 end data_path;
@@ -35,14 +35,14 @@ component ALU is
 	port(
 			A_i			: in std_logic_vector(7 downto 0);	-- Signed
 			B_i			: in std_logic_vector(7 downto 0);	-- Signed
-			ALU_Sel_i		: in std_logic_vector(2 downto 0);	-- iÅŸlem tÃ¼rÃ¼
+			ALU_Sel_i		: in std_logic_vector(2 downto 0);	-- iþlem türü
 			-- Output:
 			NZVC_o		: out std_logic_vector(3 downto 0);
 			ALU_result_o	: out std_logic_vector(7 downto 0)
 	);
 end component;
 
--- Veri yolu iÃ§ sinyalleri:
+-- Veri yolu iç sinyalleri:
 signal BUS1	 		 : std_logic_vector(7 downto 0);
 signal BUS2			 : std_logic_vector(7 downto 0);
 signal ALU_result	 : std_logic_vector(7 downto 0);
@@ -153,7 +153,7 @@ ALU_U: ALU port map
 	end process;
 	CCR_Result_o <= CCR;
 	
--- Veri yolundan belleÄŸe gidecek sinyal atamasÄ±:
+-- Veri yolundan belleðe gidecek sinyal atamasý:
 	to_memory_o <= BUS1;
 
 
